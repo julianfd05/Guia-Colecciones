@@ -6,8 +6,10 @@
 package ejercicio1_colecciones;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.Scanner;
+import java.util.TreeSet;
 
 /**
  *
@@ -23,21 +25,21 @@ public class Ejercicio1_colecciones {
         Scanner read=new Scanner(System.in).useDelimiter("\n");
         ArrayList<String> razas=new ArrayList();
         
-        int sel=0;
+        String sel="";
         
         
-        while (sel!=2) {
+        while (!sel.equals("2")) {
             System.out.println("Ingrese el nombre de una raza de perros:");
             razas.add(read.next());
-            sel=0;
-            while (sel!=1&&sel!=2){
+            sel="";
+            while (!sel.equals("1")&&!sel.equals("2")){
                 System.out.println("¿Desea agregar otra raza de perros?(1.Si/2.No)");
-                sel=read.nextInt();
+                sel=read.next();
                 switch (sel) {
-                    case 1:
+                    case "1":
                         continue;
-                    case 2:
-                        sel=2;
+                    case "2":
+                        sel="2";
                         break;
                     default:
                         System.out.println("Opcion incorrecta");
@@ -49,7 +51,31 @@ public class Ejercicio1_colecciones {
             System.out.println(raza);
         }
         
+        ///EJERCICIO 2
+        //creo el iterator
+        Iterator<String> i= razas.iterator();
         
+        
+        System.out.println("¿Que raza desea eliminar de la lista?");
+        String eliminar=read.next();
+        int sum=0;
+        
+        while (i.hasNext()){
+            //busco la raza para eliminarla de la lista
+            if (i.next().equals(eliminar)){
+                i.remove();
+                sum++;
+            }   
+        }
+        
+        if (sum==0) {
+            System.out.println("La raza ingresada no se encontro en la lista");
+        }
+        Collections.sort(razas);
+        System.out.println("Ahora la lista ordenada es:");
+        for (String raza:razas){
+            System.out.println(raza);
+        }
     }
     
 }
